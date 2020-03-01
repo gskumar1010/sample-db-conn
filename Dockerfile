@@ -14,10 +14,8 @@ RUN dotnet publish -c Release -o out
 
 # build runtime image
 FROM microsoft/dotnet:2.2.1-aspnetcore-runtime as 1
-RUN apt-get update &&     apt-get install -y wget &&     apt-get install -y gnupg2 &&     wget -qO- https://deb.nodesource.com/setup_6.x  | bash - &&     apt-get install -y build-essential nodejs
 RUN mkdir /app
 WORKDIR /app
-RUN apt-get update && apt-get -y install ca-certificates
 
 COPY --from=build-env /app/out ./
 ENV ASPNETCORE_ENVIRONMENT=Testing
